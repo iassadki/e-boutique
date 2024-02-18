@@ -24,6 +24,9 @@ class Order
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateTime = null;
 
+    #[ORM\ManyToOne(inversedBy: 'orders_id')]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +64,13 @@ class Order
     public function setDateTime(\DateTimeInterface $dateTime): static
     {
         $this->dateTime = $dateTime;
+
+        return $this;
+    }
+
+    public function setId(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -37,6 +37,10 @@ class CustomerAddress
     #[ORM\Column(length: 255)]
     private ?string $country = null;
 
+    #[ORM\ManyToOne(inversedBy: 'customerAddresses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -134,6 +138,13 @@ class CustomerAddress
     public function setCountry(string $country): static
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function setId(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
