@@ -24,7 +24,7 @@ class Order
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateTime = null;
 
-    #[ORM\ManyToOne(inversedBy: 'orders_id')]
+    #[ORM\ManyToOne(inversedBy: 'orders')]
     private ?User $user = null;
 
     public function getId(): ?int
@@ -73,5 +73,10 @@ class Order
         $this->user = $user;
 
         return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
     }
 }

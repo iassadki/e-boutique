@@ -22,11 +22,11 @@ class Category
     private ?string $description = null;
 
     #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'category')]
-    private Collection $product;
+    private Collection $products;
 
     public function __construct()
     {
-        $this->product = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -60,8 +60,8 @@ class Category
 
     public function addId(Product $id): static
     {
-        if (!$this->product->contains($id)) {
-            $this->product->add($id);
+        if (!$this->products->contains($id)) {
+            $this->products->add($id);
             $id->setCategory($this);
         }
 
@@ -70,7 +70,7 @@ class Category
 
     public function removeId(Product $id): static
     {
-        if ($this->product->removeElement($id)) {
+        if ($this->products->removeElement($id)) {
             // set the owning side to null (unless already changed)
             if ($id->getCategory() === $this) {
                 $id->setCategory(null);

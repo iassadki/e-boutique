@@ -40,16 +40,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\OneToMany(targetEntity: CustomerAddress::class, mappedBy: 'id_')]
+    #[ORM\OneToMany(targetEntity: CustomerAddress::class, mappedBy: 'user')]
     private Collection $customerAddresses;
 
-    #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'id_')]
-    private Collection $orders_id;
+    #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'user')]
+    private Collection $orders;
 
     public function __construct()
     {
         $this->customerAddresses = new ArrayCollection();
-        $this->orders_id = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -194,13 +194,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getOrdersId(): Collection
     {
-        return $this->orders_id;
+        return $this->orders;
     }
 
     public function addOrdersId(Order $ordersId): static
     {
-        if (!$this->orders_id->contains($ordersId)) {
-            $this->orders_id->add($ordersId);
+        if (!$this->orders->contains($ordersId)) {
+            $this->orders->add($ordersId);
             $ordersId->setId($this);
         }
 
@@ -209,7 +209,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeOrdersId(Order $ordersId): static
     {
-        if ($this->orders_id->removeElement($ordersId)) {
+        if ($this->orders->removeElement($ordersId)) {
             // set the owning side to null (unless already changed)
             if ($ordersId->getId() === $this) {
                 $ordersId->setId(null);
