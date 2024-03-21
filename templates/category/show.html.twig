@@ -8,6 +8,7 @@
     <ul>
         {% for product in category.products %}
             <li>{{product.id}} {{product.name}} ({{product.description}})</li>
+            <a href="{{path('app_product_show', {'id' : product.id})}}">Voir le produit</a>
         {% endfor %}
     </ul>
 {% endblock %}

@@ -22,6 +22,9 @@ class Cart
 
     private ?User $user = null;
 
+    #[ORM\OneToOne(mappedBy: 'cart', cascade: ['persist', 'remove'])]
+    private ?Order $cart = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -42,6 +45,23 @@ class Cart
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCart(): ?Order
+    {
+        return $this->cart;
+    }
+
+    public function setCart(Order $cart): static
+    {
+        // set the owning side of the relation if necessary
+        if ($cart->getCart() !== $this) {
+            $cart->setCart($this);
+        }
+
+        $this->cart = $cart;
 
         return $this;
     }
