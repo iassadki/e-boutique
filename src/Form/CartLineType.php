@@ -3,19 +3,25 @@
 namespace App\Form;
 
 use App\Entity\Cart;
-use App\Entity\User;
+use App\Entity\CartLine;
+use App\Entity\Product;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CartType extends AbstractType
+class CartLineType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('user', EntityType::class, [
-                'class' => User::class,
+            ->add('quantity')
+            ->add('product', EntityType::class, [
+                'class' => Product::class,
+'choice_label' => 'id',
+            ])
+            ->add('cart', EntityType::class, [
+                'class' => Cart::class,
 'choice_label' => 'id',
             ])
         ;
@@ -24,7 +30,7 @@ class CartType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Cart::class,
+            'data_class' => CartLine::class,
         ]);
     }
 }

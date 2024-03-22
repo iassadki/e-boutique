@@ -24,8 +24,7 @@ final class Version20240321215427 extends AbstractMigration
         // $this->addSql('DROP INDEX UNIQ_BA388B78D9F6D38 ON cart');
         // $this->addSql('ALTER TABLE cart DROP order_id');
 
-        // supprimer la colonne order_id d'index UNIQ_BA388B78D9F6D38
- // Supprimer la clé étrangère UNIQ_BA388B78D9F6D38
+    // Supprimer la clé étrangère UNIQ_BA388B78D9F6D38
     $this->addSql('ALTER TABLE cart DROP FOREIGN KEY UNIQ_BA388B78D9F6D38');
     
     // Supprimer l'index UNIQ_BA388B78D9F6D38
@@ -33,7 +32,6 @@ final class Version20240321215427 extends AbstractMigration
     
     // Supprimer la colonne order_id
     $this->addSql('ALTER TABLE cart DROP COLUMN order_id');
-        
     }
 
     public function down(Schema $schema): void
