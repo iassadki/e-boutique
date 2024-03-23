@@ -142,6 +142,11 @@ class CustomerAddress
         return $this;
     }
 
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
     public function setId(?User $user): static
     {
         $this->user = $user;

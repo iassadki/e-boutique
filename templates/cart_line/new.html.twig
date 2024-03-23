@@ -11,11 +11,19 @@
 
      <tr>
         <td>{{ cart.id }}</td>
-        <td>{{ cart.quantity }}</td>
-        {# <td>{{ cart.product_id }}</td>
-        <td>{{ cart.cart_id }}</td> #}
+        <td>{{ cart.getProduct().getId() }}</td>
+        <td>
+            <select name="quantity" id="quantity">
+                {% for i in 1..10 %}
+                    <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
+            </select>
+        </td>
+
+
+        {# <td>{{ cart.cart_id }}</td>  #}
     </tr>
     {% endfor %}
 
-    <a href="{{ path('app_cart_line_index') }}">back to list</a>
+    <a href="{{ path('app_customer_address_new') }}">back to list</a>
 {% endblock %}
