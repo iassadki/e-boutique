@@ -5,7 +5,17 @@
 {% block body %}
     <h1>Create new CartLine</h1>
 
-    {{ include('cart_line/_form.html.twig') }}
+    {# {{ include('cart_line/_form.html.twig') }} #}
+
+    {% for cart in cart %}
+
+     <tr>
+        <td>{{ cart.id }}</td>
+        <td>{{ cart.quantity }}</td>
+        {# <td>{{ cart.product_id }}</td>
+        <td>{{ cart.cart_id }}</td> #}
+    </tr>
+    {% endfor %}
 
     <a href="{{ path('app_cart_line_index') }}">back to list</a>
 {% endblock %}

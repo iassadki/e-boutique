@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Cart;
 use App\Entity\CartLine;
+use App\Entity\Product;
 use App\Form\CartLineType;
 use App\Repository\CartLineRepository;
+use App\Repository\ProductRepository;
 use App\Repository\CartRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,11 +26,9 @@ class CartLineController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_cart_line_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, CartRepository $cartRepository): Response
+    #[Route('/new/{productId}', name: 'app_cart_line_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, CartRepository $cartRepository, ProductRepository $productRepository, $productId, CartLineRepository $cartLineRepository): Response
     {
-
-        
 
         $user = $this->getUser();
 
@@ -47,22 +47,31 @@ class CartLineController extends AbstractController
             $entityManager->persist($cart);
             $entityManager->flush();
         }
+
+        $product = $productRepository->find($productId);
+        if (!$product) {
+            throw $this->createNotFoundException('The product does not exist');
+        }
        
         $cartLine = new CartLine();
         $cartLine->setCart($cart);
-        $form = $this->createForm(CartLineType::class, $cartLine);
-        $form->handleRequest($request);
+        
+        if($cartLineRepository->findOneBy(['product'=> $product])){
+           //redirect to product page
+              return $this->redirectToRoute('app_product_index');
+        }        
+        
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($cartLine);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_cart_line_index', [], Response::HTTP_SEE_OTHER);
-        }
+        $cartLine->setProduct($product);
+        $cartLine->setQuantity($cartLine->getQuantity() + 1);
+        
+        $entityManager->persist($cartLine);
+        $entityManager->flush();
 
         return $this->render('cart_line/new.html.twig', [
+            'cart' => $cartLineRepository->findAll(),
             'cart_line' => $cartLine,
-            'form' => $form,
+            'product_id'=> $productId
         ]);
     }
 
@@ -77,19 +86,12 @@ class CartLineController extends AbstractController
     #[Route('/{id}/edit', name: 'app_cart_line_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, CartLine $cartLine, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(CartLineType::class, $cartLine);
-        $form->handleRequest($request);
+        //update quantity
+        $cartLine->setQuantity($cartLine->getQuantity() + 1);
+        $entityManager->persist($cartLine);
+        $entityManager->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_cart_line_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('cart_line/edit.html.twig', [
-            'cart_line' => $cartLine,
-            'form' => $form,
-        ]);
+         return $this->redirectToRoute('app_cart_line_new');
     }
 
     #[Route('/{id}', name: 'app_cart_line_delete', methods: ['POST'])]
