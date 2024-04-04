@@ -15,14 +15,27 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/cart/line')]
+#[Route('/cart_line')]
 class CartLineController extends AbstractController
 {
     #[Route('/', name: 'app_cart_line_index', methods: ['GET'])]
-    public function index(CartLineRepository $cartLineRepository): Response
-    {
+    public function index(CartLineRepository $cartLineRepository, CartRepository $cartRepository): Response
+    { 
+        $user = $this->getUser();
+        $cart = $cartRepository->findOneBy(['user' => $user]);
+    
+        $cartLines = [];
+        $total = 0;
+        if ($cart) {
+            $cartLines = $cartLineRepository->findBy(['cart' => $cart]);
+            foreach ($cartLines as $cartLine) {
+                $total += $cartLine->getProduct()->getPrice() * $cartLine->getQuantity();
+            }
+        }
+    
         return $this->render('cart_line/index.html.twig', [
-            'cart_lines' => $cartLineRepository->findAll(),
+            'cart_lines' => $cartLines,
+            'total' => $total,
         ]);
     }
 
@@ -37,7 +50,7 @@ class CartLineController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-         // Try to find an existing cart for the user
+        // Try to find an existing cart for the user
         $cart = $cartRepository->findOneBy(['user' => $user]);
 
         // If no cart exists, create a new one
@@ -58,10 +71,9 @@ class CartLineController extends AbstractController
         
         if($cartLineRepository->findOneBy(['product'=> $product])){
            //redirect to product page
-              return $this->redirectToRoute('app_product_index');
+              return $this->redirectToRoute('app_cart_line_index');
         }        
         
-
         $cartLine->setProduct($product);
         $cartLine->setQuantity($cartLine->getQuantity() + 1);
         
@@ -83,24 +95,31 @@ class CartLineController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_cart_line_edit', methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'app_cart_line_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, CartLine $cartLine, EntityManagerInterface $entityManager): Response
     {
-        //update quantity
-        $cartLine->setQuantity($cartLine->getQuantity() + 1);
-        $entityManager->persist($cartLine);
-        $entityManager->flush();
+        $quantity = $request->request->get('quantity');
 
-         return $this->redirectToRoute('app_cart_line_new');
+        if ($quantity) {
+            $cartLine->setQuantity($quantity);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_cart_line_index');
     }
 
     #[Route('/{id}', name: 'app_cart_line_delete', methods: ['POST'])]
     public function delete(Request $request, CartLine $cartLine, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$cartLine->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($cartLine);
-            $entityManager->flush();
-        }
+        // if ($this->isCsrfTokenValid('delete'.$cartLine->getId(), $request->request->get('_token'))) {
+        //     $entityManager->remove($cartLine);
+        //     $entityManager->flush();
+        // }
+
+        //delete cart line without form
+        $entityManager->remove($cartLine);
+        $entityManager->flush();
+
 
         return $this->redirectToRoute('app_cart_line_index', [], Response::HTTP_SEE_OTHER);
     }

@@ -9,6 +9,8 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Car</th>
+                <th>Price</th>
                 <th>Quantity</th>
                 <th>actions</th>
             </tr>
@@ -17,19 +19,29 @@
         {% for cart_line in cart_lines %}
             <tr>
                 <td>{{ cart_line.id }}</td>
-                <td>{{ cart_line.quantity }}</td>
+                <td>{{ cart_line.product.name }}</td>
+                <td>{{ cart_line.product.price }}</td>
+                {# <td>{{ cart_line.quantity }}</td> #}
+                {# put an inpout likje this modifiable for the quantity <input type="number" value="1" min="1" max="10"> #}
+                <td>
+                    <input type="number" value="{{ cart_line.quantity }}" min="1" max="10">
+                </td>
                 <td>
                     <a href="{{ path('app_cart_line_show', {'id': cart_line.id}) }}">show</a>
-                    <a href="{{ path('app_cart_line_edit', {'id': cart_line.id}) }}">edit</a>
+                    <a href="{{ path('app_cart_line_edit', {'id': cart_line.id}) }}">Update</a>
+                    <a href="{{ path('app_cart_line_delete', {'id': cart_line.id}) }}" onclick="return confirm('Are you sure?')">delete</a>
                 </td>
-            </tr>
+             </tr> 
         {% else %}
             <tr>
                 <td colspan="3">no records found</td>
             </tr>
         {% endfor %}
+        <tr>
+            <td colspan="3">Total: {{ total }}</td>
+        </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_cart_line_new') }}">Create new</a>
+    {# <a href="{{ path('app_cart_line_new') }}">Create new</a> #}
 {% endblock %}
