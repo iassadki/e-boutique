@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Cart;
 use App\Entity\Order;
 use App\Form\OrderType;
+use App\Repository\CartLineRepository;
+use App\Repository\CartRepository;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,23 +26,36 @@ class OrderController extends AbstractController
     }
 
     #[Route('/new', name: 'app_order_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, OrderRepository $orderRepository, CartRepository $cartRepository, CartLineRepository $cartLineRepository): Response
     {
         $order = new Order();
-        $form = $this->createForm(OrderType::class, $order);
-        $form->handleRequest($request);
+        $user = $this->getUser();
+        $order->setId($user);
+        $order->setDateTime(new \DateTime());
+        $order->setValid(true);
+        $random = random_int(100000, 999999);
+        while ($orderRepository->findOneBy(['orderNumber' => $random])) {
+            // If an order with this number already exists, generate a new random number
+            $random = random_int(100000, 999999);
+        }
+        $order->setOrderNumber($random);
+        $cart = $cartRepository->findOneBy(['user' => $user]);
+        $order->setCart($cart);
+        
+        $entityManager->persist($order);
+        $entityManager->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($order);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_order_index', [], Response::HTTP_SEE_OTHER);
+        // Remove all CartLines of the user
+        $cartLines = $cartLineRepository->findBy(['cart' => $cart]);
+        foreach ($cartLines as $cartLine) {
+            $entityManager->remove($cartLine);
         }
 
-        return $this->render('order/new.html.twig', [
-            'order' => $order,
-            'form' => $form,
-        ]);
+        // Flush the entity manager to commit the CartLine removals
+        $entityManager->flush();
+
+        return $this->redirectToRoute('home');
+       
     }
 
     #[Route('/{id}', name: 'app_order_show', methods: ['GET'])]

@@ -27,19 +27,18 @@ class CustomerAddressController extends AbstractController
     {
         $customerAddress = new CustomerAddress();
         $form = $this->createForm(CustomerAddressType::class, $customerAddress);
+        $user = $this->getUser();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $customerAddress->setId($user);
             $entityManager->persist($customerAddress);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_customer_address_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('customer_address/new.html.twig', [
-            'customer_address' => $customerAddress,
-            'form' => $form,
-        ]);
+       return $this->redirectToRoute('app_order_new');
     }
 
     #[Route('/{id}', name: 'app_customer_address_show', methods: ['GET'])]

@@ -22,10 +22,6 @@ class CustomerAddressType extends AbstractType
             ->add('postalCode')
             ->add('city')
             ->add('country')
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-'choice_label' => 'id',
-            ])
         ;
     }
 

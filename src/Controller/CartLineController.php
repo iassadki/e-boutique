@@ -68,11 +68,13 @@ class CartLineController extends AbstractController
        
         $cartLine = new CartLine();
         $cartLine->setCart($cart);
+
+        //check if product already in cart of the user
         
-        if($cartLineRepository->findOneBy(['product'=> $product])){
-           //redirect to product page
-              return $this->redirectToRoute('app_cart_line_index');
-        }        
+       if($cartLineRepository->findOneBy(['cart'=> $cart, 'product'=> $product])){
+            //redirect to product page
+            return $this->redirectToRoute('app_cart_line_index');
+       }
         
         $cartLine->setProduct($product);
         $cartLine->setQuantity($cartLine->getQuantity() + 1);
@@ -80,11 +82,7 @@ class CartLineController extends AbstractController
         $entityManager->persist($cartLine);
         $entityManager->flush();
 
-        return $this->render('cart_line/new.html.twig', [
-            'cart' => $cartLineRepository->findAll(),
-            'cart_line' => $cartLine,
-            'product_id'=> $productId
-        ]);
+        return $this->redirectToRoute('app_cart_line_index');
     }
 
     #[Route('/{id}', name: 'app_cart_line_show', methods: ['GET'])]
@@ -111,15 +109,10 @@ class CartLineController extends AbstractController
     #[Route('/{id}', name: 'app_cart_line_delete', methods: ['POST'])]
     public function delete(Request $request, CartLine $cartLine, EntityManagerInterface $entityManager): Response
     {
-        // if ($this->isCsrfTokenValid('delete'.$cartLine->getId(), $request->request->get('_token'))) {
-        //     $entityManager->remove($cartLine);
-        //     $entityManager->flush();
-        // }
-
-        //delete cart line without form
-        $entityManager->remove($cartLine);
-        $entityManager->flush();
-
+        if ($this->isCsrfTokenValid('delete'.$cartLine->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($cartLine);
+            $entityManager->flush();
+        }
 
         return $this->redirectToRoute('app_cart_line_index', [], Response::HTTP_SEE_OTHER);
     }
