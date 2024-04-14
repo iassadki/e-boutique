@@ -7,6 +7,7 @@ use App\Entity\Order;
 use App\Form\OrderType;
 use App\Repository\CartLineRepository;
 use App\Repository\CartRepository;
+use App\Repository\CustomerAddressRepository;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -54,13 +55,22 @@ class OrderController extends AbstractController
         // Flush the entity manager to commit the CartLine removals
         $entityManager->flush();
 
-        return $this->redirectToRoute('home');
+
+
+        return $this->redirectToRoute('app_order_show', ['id' => $order->getId()]);
        
     }
 
     #[Route('/{id}', name: 'app_order_show', methods: ['GET'])]
-    public function show(Order $order): Response
+    public function show(Order $order,EntityManagerInterface $entityManager ,CustomerAddressRepository $customerAddressRepository): Response
     {
+        $user = $this->getUser();  
+        $customerAddresses = $customerAddressRepository->findBy(['user' => $user]);
+        
+        foreach($customerAddresses as $customerAddress){
+            $entityManager->remove($customerAddress);
+        }
+        $entityManager->flush();
         return $this->render('order/show.html.twig', [
             'order' => $order,
         ]);

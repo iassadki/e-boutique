@@ -34,11 +34,16 @@ class CustomerAddressController extends AbstractController
             $customerAddress->setId($user);
             $entityManager->persist($customerAddress);
             $entityManager->flush();
-
-            return $this->redirectToRoute('app_customer_address_index', [], Response::HTTP_SEE_OTHER);
+            
+            return $this->redirectToRoute('app_order_new');
+           
         }
 
-       return $this->redirectToRoute('app_order_new');
+        return $this->render('customer_address/new.html.twig', [
+            'customer_address' => $customerAddress,
+            'form' => $form,
+        ]); 
+       
     }
 
     #[Route('/{id}', name: 'app_customer_address_show', methods: ['GET'])]

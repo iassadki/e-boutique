@@ -29,8 +29,7 @@
         <tbody>
         {% for product in products %}
         {% for media in img %}
-
-        {%% if product.id == media.product %}
+        {% if product.id == media.product.id %}
         {# {%% while product.id == media.product %} #}
 
             <tr>
@@ -47,30 +46,14 @@
                     <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
                 </td>
             </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
+        {% endif %}
         {% endfor %}
         {% endfor %}
 
-    {# afficher tout les medias #}
-    {% for media in img %}
-        <tr>
-            <td><img src="{{ asset(media.path ~ media.type) }}" alt="{{ media.alt }}"></td>
-            {# <td>
-                <a href="{{ path('app_media_show', {'id': media.id}) }}">show</a>
-                <a href="{{ path('app_media_edit', {'id': media.id}) }}">edit</a>
-            </td> #}
-        </tr>
-    {% else %}
-        <tr>
-            <td colspan="6">no records found</td>
-        </tr>
-    {% endfor %}
+    
 
         </tbody>
     </table>
-
+    {# {% if %} #}
     <a href="{{ path('app_product_new') }}">Create new</a>
 {% endblock %}
