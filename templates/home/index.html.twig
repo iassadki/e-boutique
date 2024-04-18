@@ -1,22 +1,90 @@
-<div class="background-image">
-    <header>
-        <a class="navlogo" href="index.html"></a>
-        <div id="navbar" class="menu-burger">
-            <ul class="menu-burger-content">
-                <li><a href="{{path('app_product_index')}}">Nos véhicules</a></li>
-                <li><a href="{{path('app_category_index')}}">Catégories de véhicules</a></li>
-                <li><a href="{{path('app_cart_line_index')}}">Panier</a></li>
-            </ul>
-        </div>
-        <div id="button">
-            <a href="{{path('app_login')}}">Connexion</a>
-            <a href="{{path('app_register')}}">Créer un compte</a>
-        </div>
-    </header>
-    <p class="titre">EXOTIC-RENTALS</p>
-    <p class="sous-titre">Bienvenue à la meilleure boite de location de véhicules de luxe de Paris</p>
-    <div id="button" class="home-button">
-        <a class="buttons-home" href="categories.html">Nos voitures</a>
-        <a class="buttons-home" href="voitures.html">Catégories de véhicules</a>
-    </div>
+{% include 'base.html.twig' %}
+
+<div class="container">
+	{# <center>
+			<p class="titre">
+				Catégories
+			</p>
+		</center> #}
+	{# {% if categories is not empty %}
+			<div class="row">
+				{% for category in categories %}
+					<div class="col-md-3">
+						<div class="card-home">
+							<img src="{{ asset('../assets/img/cars/luxe.jpg') }}" alt="Description de l'image">
+							<div class="card-content">
+								<p>{{ category.name }}</p>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		{% else %}
+			<div class="row">
+				<div class="col-md-12">
+					<p class="text-center">Aucune catégorie trouvée</p>
+				</div>
+			</div>
+		{% endif %} #}
+
+
+		{# <center>
+			<p class="titre"> Nouveautés
+		</p>
+	</center> #}
+
+	{# en deux colonnes, met une image qui envoie vers la page produit, et une image qui renvoie vers les categories #}
+	<div class="row">
+		<div class="col-md-6">
+			<a href="{{ path('app_product_index') }}">
+				<div class="card-home">
+					<img src="{{ asset('../assets/img/cars/luxe.jpg') }}" alt="Description de l'image">
+					<div class="card-content">
+						<p>Produits</p>
+					</div>
+				</div>
+			</a>
+		</div>
+		<div class="col-md-6">
+			<a href="{{ path('app_category_index') }}">
+				<div class="card-home">
+					<img src="{{ asset('../assets/img/cars/luxe.jpg') }}" alt="Description de l'image">
+					<div class="card-content">
+						<p>Categories</p>
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+
+
+	{#<div class="row">
+	
+			<div class="col-md-3">
+				<div class="card-home">
+					<img src="{{ asset('../assets/img/cars/luxe.jpg') }}" alt="Description de l'image">
+					<div class="card-content">
+						<p>Voiture 1</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card-home">
+					<img src="{{ asset('../assets/img/cars/luxe.jpg') }}" alt="Description de l'image">
+					<div class="card-content">
+						<p>Voiture 2</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="card-home">
+					<img src="{{ asset('../assets/img/cars/luxe.jpg') }}" alt="Description de l'image">
+					<div class="card-content">
+						<p>Voiture 3</p>
+					</div>
+				</div>
+			</div>
+		</div> #}
 </div>
+
+{% include 'footer.html.twig' %}

@@ -1,14 +1,49 @@
-{% extends 'base.html.twig' %}
+{% include 'base.html.twig' %}
 
-{% block title %}Category{% endblock %}
+{% block title %}Category
+	{{ category.name }}
+{% endblock %}
 
 {% block body %}
-    <h1>Toutes les voitures de catégorie {{category.name}}</h1>
+	<h1>Toutes les voitures de catégorie
+		{{ category.name }}</h1>
 
-    <ul>
-        {% for product in category.products %}
-            <li>{{product.id}} {{product.name}} ({{product.description}})</li>
-            <a href="{{path('app_product_show', {'id' : product.id})}}">Voir le produit</a>
-        {% endfor %}
-    </ul>
+	<div class="container">
+		<div class="row">
+			{% for product in category.products %}
+				{% for img in img %}
+					{% if product.id == img.product.id %}
+						<div class="col-md-3">
+							<div class="card">
+								{# <img src="{{ asset('assets/img/cars/luxe.jpg') }}" alt="{{ img.alt }}"> #}
+								{# <li>{{product.id}}
+									{{product.name}}
+									({{product.description}}) #}
+									<img src="{{ asset(img.path ~ img.type) }}" alt="{{ img.alt }}">
+                                    {# </li> #}
+								{# <a href="{{path('app_product_show', {'id' : product.id})}}">Voir le produit</a> #}
+
+
+								<div class="card-body">
+									<h5 class="card-title">{{ product.name }}</h5>
+									<p class="card-text">{{ product.description }}</p>
+									<p class="card-text">{{ product.price }}
+										$</p>
+									{# <div class="extra-info"> #}
+									{#     <p>Vitesse Max: 300 km/h</p> #}
+									{#     <p>0-100 km/h: 2.5 s</p> #}
+									{#     <p>Nombre Km: 300 km</p> #}
+									{# </div> #}
+										<a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-primary"> Voir le produit</a>
+									<a href="{{ path('app_cart_line_new', {'productId': product.id}) }}" class="btn btn-primary">Ajouter au panier</a>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}
+
+{# {% include 'footer.html.twig' %} #}

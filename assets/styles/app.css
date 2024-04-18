@@ -1,3 +1,441 @@
-body {
-    background-color: skyblue;
+/* Desktop version */
+@media screen and (min-width: 1024px) and (max-width: 2000px) {
+
+    body {
+        margin: 0;
+        padding: 0;
+        /* width: 100%; */
+        /* height: 100%; */
+        color: #000;
+        font-family: 'Blorado', sans-serif;
+    }
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0px 0px 40px 0px;
+        height: 110px;
+        /* background-color: rgba(0, 0, 0, 0.2); */
+    }
+
+    .background-image {
+        width: 100%;
+        background-image: url("../../assets/img/cars/sportives-compactes.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;        
+        height: 50vh;
+    }
+
+    .background-image .titre {
+        display: flex;
+        font-size: 50px;
+        font-weight: 900;
+        color: #FFF;
+        align-items: center;
+        justify-content: center;
+        margin-top: 150px;
+    }
+
+    /* shopping cart c'est un bouton panier */
+    .shopping-cart {
+        display: flex;
+        margin-left: 80px;
+        color: #FFF;
+        text-decoration: none;
+    }
+
+    /* .background-image .sous-titre {
+        display: flex;
+        font-size: 30px;
+        font-weight: 700;
+        font-family: 'Blorado', sans-serif;
+        color: #FFF;
+        align-items: center;
+        justify-content: center;
+    } */
+
+    .home-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .home-button .buttons-home {
+        margin-right: 10px;
+        border-radius: 90px;
+        border-color: rgba(0, 0, 0, 0.4) !important;
+        background-color: rgba(0, 0, 0, 0.4) !important;
+    }
+
+    /* hover en plus sombre */
+    .home-button .buttons-home:hover {
+        background-color: rgba(0, 0, 0, 0.6) !important;
+        color: #FFF !important;
+    }
+
+    .site-icon {
+        display: block;
+        /* width: 50px; */
+        /* height: 50px; */
+        /* background-image: url("../img/icon.png"); */
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .navlogo {
+        display: block;
+        width: 150px;
+        height: 150px;
+        margin-left: 50px;
+        background-image: url("../../assets/img/logos/logo.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    #navbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    #navbar>ul {
+        display: inline-block;
+        list-style: none;
+        padding: 0;
+    }
+
+    #navbar>ul>li {
+        display: inline-block;
+    }
+
+    #navbar>ul>li>a {
+        font-size: 16px;
+        font-weight: 400;
+        padding: 0 20px;
+        text-decoration: none;
+        color: #FFF;
+        font-weight: 600;
+    }
+
+    #navbar>ul>li {
+        position: relative;
+        display: inline-block;
+        padding: 20px 10px;
+        margin-top: 10px;
+    }
+
+    #button {
+        margin-right: 20px;
+    }
+
+    #button a {
+        font-size: 13px;
+        font-weight: 400;
+        text-decoration: none;
+        color: #FFF;
+        padding: 10px 20px;
+        border: 2px solid #FFF;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+    }
+
+    #button a:hover {
+        background-color: #FFF;
+        color: #000;
+    }
+
+    .card-home {
+        margin-top: 30px;
+        border: solid 1px #000;
+        border-radius: 20px;
+    }
+
+    .card-home img {
+        width: 100%;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .card-home .card-content {
+        margin-top: 10px;
+        text-align: center;
+        font-weight: 500;
+    }
+
+    /* .page-title {
+        font-size: 40px;
+        font-weight: 700;
+        margin: 150px 1500px 0px 250px;
+    } */
+
+    /*! Mettre dans un autre fichier CSS - DEBUT */
+    /* button {
+        margin-bottom: 20px;
+    } */
+
+    /* button {
+        margin-bottom: 20px;
+        margin-right: 10px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 80px;
+        cursor: pointer;
+        background-color: #324159;
+        color: #fff;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #1a2a3a;
+        animation: pulse 0.5s infinite alternate;
+    } */
+
+    /*! Mettre dans un autre fichier CSS - FIN */
+
+    .title-under-banner {
+        margin-top: 30px;
+        font-family: Copperplate, sans-serif;
+        font-weight: 900;
+        /* margin-bottom: 5px; */
+        font-size: 40px;
+        font-weight: 700;
+    }
+
+    .titre {
+        text-transform: uppercase;
+        margin-top: 30px;
+        font-size: 40px;
+        font-weight: 700;
+    }
+
+    /*! Categories */
+    .background-image-category {
+        width: 100%;
+        background-image: url("../../assets/img/nav.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 60vh;
+        margin-bottom: 50px;
+    }
+
+    .background-image-page .titre {
+        display: flex;
+        font-size: 70px;
+        font-weight: 900;
+        font-family: Notable;
+        color: #FFF;
+        align-items: center;
+        justify-content: center;
+        margin-top: 170px;
+    }
+
+    .background-image-page .sous-titre {
+        display: flex;
+        font-size: 30px;
+        font-weight: 700;
+        font-family: 'Blorado', sans-serif;
+        color: #FFF;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /*! STYLE CODE PEN */
+
+    /* .container {
+        display: flex;
+        justify-content: center;
+    } */
+
+    /* cibler la class card  */
+
+    .grid-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .grid-card {
+        width: calc(33.33% - 20px);
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 30px;
+        overflow: hidden;
+    }
+
+    .grid-card img {
+        width: 100%;
+        height: auto;
+    }
+
+    .vehicle-info {
+        padding: 10px;
+    }
+
+    .vehicle-info h2 {
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+
+    .vehicle-info p {
+        margin: 0;
+    }
+
+    .extra-info {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+        margin-top: 10px;
+    }
+
+    .extra-info p {
+        margin: 0;
+    }
+
+    #button-cart {
+        /* margin-right: 20px; */
+        /* width: 100%; */
+        /* height: 100%; */
+        /* margin: 0 auto; */
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        color: #FFF;
+        background-color: #000;
+        border: 2px solid #000;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+        padding: 10px;
+        display: block;
+        margin-bottom: 5px;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    #button-cart:hover {
+        background-color: #FFF;
+        color: #000;
+        border: 2px solid #000;
+    }
+
+    /*! CART PAGE */
+    .background-image-alt {
+        width: 100%;
+        background-image: url("../../assets/img/cars/sportives-compactes.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        /* background-position: 10cv; */
+        height: 60vh;
+    }
+
+    .background-image-cart .titre {
+        display: flex;
+        font-size: 70px;
+        font-weight: 900;
+        font-family: Notable;
+        color: #FFF;
+        align-items: center;
+        justify-content: center;
+        margin-top: 170px;
+    }
+
+    /* .container { */
+    /* margin-top: 50px; */
+    /* } */
+
+    /*! SUPPRIMER A TERME */
+    .center-buttons {
+        text-align: center;
+        margin-top: 20px;
+        /* Ajoute un espace entre les boutons et le contenu précédent */
+    }
+
+    .button-cart2 {
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+        color: #FFF;
+        background-color: #000;
+        border: 1px solid #000;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+        padding: 15px 15px 15px 15px;
+        /* display: block; */
+        /* margin-bottom: 5px; */
+        /* margin-top: 20px; */
+        /* text-align: center; */
+    }
+
+    .button-cart2:hover {
+        background-color: #FFF;
+        color: #000;
+        border: 1px solid #000;
+    }
+
+    .portfolio-item {
+        background-color: #e6e6e6;
+        width: 60%;
+        margin: 20px auto;
+        border: 1px solid #141c28;
+        border-radius: 10px;
+        padding: 30px;
+        text-align: left;
+        animation: fadeIn 0.6s ease-in-out;
+        display: flex;
+        align-items: center;
+    }
+
+    .portfolio-item img {
+        border-radius: 10px;
+        margin-right: 20px;
+        width: 250px;
+        height: 150px;
+        object-fit: cover;
+    }
+
+    .item-content {
+        flex: 1;
+    }
+
+    .portfolio-item .button-cart2 {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 80px;
+        cursor: pointer;
+        background-color: #000;
+        color: #fff;
+        float: right;
+    }
+
+    .portfolio-item .button-cart2:hover {
+        background-color: #FFF;
+        color: #000;
+        border: 1px solid #000;
+    }
+
+    .total {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: 700;
+        font-size: 20px;
+    }
+
+    /*! FOOTER */
+    .site-footer {
+        background-color: #f8f9fa;
+        margin-top: 50px;
+        color: #5a5a5a;
+        /* padding: 50px 0; */
+    }
+
+    .site-footer p {
+        color: #555;
+    }
+
+    .site-footer p.text-center {
+        margin-top: 20px;
+    }
 }

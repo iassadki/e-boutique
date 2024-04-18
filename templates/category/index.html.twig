@@ -1,37 +1,30 @@
-{% extends 'base.html.twig' %}
+{% include 'base.html.twig' %}
 
-{% block title %}Category index{% endblock %}
+<div class="container">
+	<div class="row">
+		{% for category in categories %}
+			<div class="col-md-3">
+				<a href="{{ path('app_category_show', {'id': category.id}) }}">
+					<div class="card">
+						<img src="{{ asset('../assets/img/cars/luxe.jpg') }}" alt="Description de l'image">
+						<div class="card-body">
+							<h5 class="card-title">{{ category.name }}</h5>
+							<!-- <p>descriptuion</p> -->
+						<!-- <p class="card-text">200000 $</p> -->
+							<!-- <div class="extra-info"> -->
+							<!-- <p>Vitesse Max: 300 km/h</p> -->
+							<!-- <p>0-100 km/h: 2.5 s</p> -->
+							<!-- <p>Nombre Km: 300 km</p> -->
+							<!-- </div> -->
+							<!-- <a href="product.html" id="button-cart">Voir le produit</a> -->
+							<!-- <a href="#" id="button-cart">Ajouter au panier</a> -->
+						</div>
+					</div>
+				</a>
+			</div>
+		{% endfor %}
+	</div>
+</div>
 
-{% block body %}
-    <h1>Category index</h1>
+{% include 'footer.html.twig' %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.name }}</td>
-                <td>{{ category.description }}</td>
-                <td>
-                    <a href="{{ path('app_category_show', {'id': category.id}) }}">show</a>
-                    <a href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_category_new') }}">Create new</a>
-{% endblock %}
