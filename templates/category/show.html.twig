@@ -19,7 +19,7 @@
 							<div class="card-body">
 								<h5 class="card-title">{{ product.name }}</h5>
 								{# <p class="card-text">{{ product.description }}</p> #}
-								<p class="card-price">{{ product.price }}
+								<p class="card-text">{{ product.price }}
 									$</p>
 								{# <a href="{{ path('app_product_show', {'id': product.id}) }}" id="button-cart">Voir le produit</a> #}
 								<a href="{{ path('app_cart_line_new', {'productId': product.id}) }}" id="button-cart">Ajouter au panier</a>
