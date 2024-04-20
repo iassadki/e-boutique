@@ -24,7 +24,8 @@
         background-image: url("../../assets/img/cars/sportives-compactes.jpg");
         background-size: cover;
         background-repeat: no-repeat;
-        background-position: center;        
+        background-position: center;
+        /* background-size: cover; */
         height: 50vh;
     }
 
