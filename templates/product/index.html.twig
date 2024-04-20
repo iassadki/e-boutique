@@ -1,61 +1,44 @@
+{% include 'base.html.twig' %}
 
+{# {% block title %}Product index
+{% endblock %} #}
 
-{% extends 'base.html.twig' %}
-
-{% block title %}Product index{% endblock %}
-
-{# css for the width and the height of the image #}
 {% block stylesheets %}
-    <style>
-        img {
-            width: 40px;
-            height: 30px;
-        }
-    </style>
+	<style></style>
 {% endblock %}
-
 {% block body %}
-    <h1>Product index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Available</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for product in products %}
-        {% for media in img %}
-        {% if product.id == media.product.id %}
-        {# {%% while product.id == media.product %} #}
+	<center>
+		<h1>Nos véhicules</h1>
+	</center>
 
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td><img src="{{ asset(media.path ~ media.type) }}" alt="{{ media.alt }}" ></td>
-                {# <td><img src="{{asset('{{img.path}}{{img.type}}' )}}" alt={{img.alt}}></td> #}
-                {# <td> <img src="{{ asset('/img/cars/Mercedes-Benz-S-Class.jpg') }}" alt="image"></td> #}
-                <td>{{ product.description }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.available ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% endif %}
-        {% endfor %}
-        {# {% endfor %} #}
 
-    
+	<div class="container">
+		<div class="row">
+			{% for product in products %}
+				{% for media in img %}
+					{% if product.id == media.product.id %}
+						<div class="col-md-4">
+							<a class"link-vehicles" href="{{ path('app_product_show', {'id': product.id}) }}">
+								<div class="card">
+									<img src="{{ asset(media.path ~ media.type) }}" class="card-img-top" alt="{{ media.alt }}">
+								</a>
+								<div class="card-body">
+									<h5 class="card-title">{{ product.name }}</h5>
+									{# <p class="card-text">{{ product.description }}</p> #}
+									<p class="card-price">{{ product.price }}
+										€</p>
+									<a href="{{ path('app_cart_line_new', {'productId': product.id}) }}" id="button-cart">Ajouter au panier</a>
 
-        </tbody>
-    </table>
-    {# {% if %} #}
-    <a href="{{ path('app_product_new') }}">Create new</a>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			{% endfor %}
+		</div>
+	</div>
+
+
+	<a href="{{ path('app_product_new') }}" class="btn btn-primary">Create new</a>
 {% endblock %}

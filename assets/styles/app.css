@@ -38,6 +38,34 @@
         margin-top: 150px;
     }
 
+    .welcome-text {
+        color: #000;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .welcome-text h1 {
+        font-size: 40px;
+        font-weight: 700;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .welcome-text p {
+        font-size: 20px;
+        font-weight: 500;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .welcome-text .welcome-buttons {
+        /* meme style que mes boutons */
+        display: flex;
+        justify-content: center;
+    }
+
     /* shopping cart c'est un bouton panier */
     .shopping-cart {
         display: flex;
@@ -171,28 +199,6 @@
         margin: 150px 1500px 0px 250px;
     } */
 
-    /*! Mettre dans un autre fichier CSS - DEBUT */
-    /* button {
-        margin-bottom: 20px;
-    } */
-
-    /* button {
-        margin-bottom: 20px;
-        margin-right: 10px;
-        padding: 8px 16px;
-        border: none;
-        border-radius: 80px;
-        cursor: pointer;
-        background-color: #324159;
-        color: #fff;
-        transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-        background-color: #1a2a3a;
-        animation: pulse 0.5s infinite alternate;
-    } */
-
     /*! Mettre dans un autre fichier CSS - FIN */
 
     .title-under-banner {
@@ -211,7 +217,44 @@
         font-weight: 700;
     }
 
-    /*! Categories */
+    /*! ALL VEHICLES PAGE */
+    .card-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin-top: 10px;
+        text-decoration: none;
+    }
+
+    .card-img-top {
+        border-radius: 20px 20px 0 0;
+        /* width: 100%; */
+        /* height: 200px; */
+        /* object-fit: cover; */
+    }
+
+    .card-price {
+        font-size: 18px;
+        font-weight: 500;
+        margin-top: 10px;
+    }
+
+    .link-vehicles {
+        text-decoration: none;
+        color: #000;
+    }
+
+    .card {
+        margin-top: 30px;
+        border: solid 1px #24242456;
+        border-radius: 20px;
+        background-color: #eeeeee2a;
+        text-decoration: none;
+    }
+
+    /*! VEHICLE PAGE */
+    /* ... */
+
+    /*! CATEGORY PAGE */
     .background-image-category {
         width: 100%;
         background-image: url("../../assets/img/nav.png");

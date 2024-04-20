@@ -1,49 +1,36 @@
 {% include 'base.html.twig' %}
 
-{% block title %}Category
-	{{ category.name }}
-{% endblock %}
+<div class="container">
+{# tous les vehoicules du NomCategorie, en titre h1 #}
+<center>
+	<h1>{{ category.name }}</h1>
+</center>
+	<div class="row">
+		{% for product in category.products %}
+			{% for media in img %}
+				{% if product.id == media.product.id %}
+					<div class="col-md-4">
+						<a class"link-vehicles" href="{{ path('app_product_show', {'id': product.id}) }}">
 
-{% block body %}
-	<h1>Toutes les voitures de catégorie
-		{{ category.name }}</h1>
-
-	<div class="container">
-		<div class="row">
-			{% for product in category.products %}
-				{% for img in img %}
-					{% if product.id == img.product.id %}
-						<div class="col-md-3">
 							<div class="card">
-								{# <img src="{{ asset('assets/img/cars/luxe.jpg') }}" alt="{{ img.alt }}"> #}
-								{# <li>{{product.id}}
-									{{product.name}}
-									({{product.description}}) #}
-									<img src="{{ asset(img.path ~ img.type) }}" alt="{{ img.alt }}">
-                                    {# </li> #}
-								{# <a href="{{path('app_product_show', {'id' : product.id})}}">Voir le produit</a> #}
+								<img class="card-img-top" src="{{ asset(media.path ~ media.type) }}" alt="{{ media.alt }}">
+							</a>
 
-
-								<div class="card-body">
-									<h5 class="card-title">{{ product.name }}</h5>
-									<p class="card-text">{{ product.description }}</p>
-									<p class="card-text">{{ product.price }}
-										$</p>
-									{# <div class="extra-info"> #}
-									{#     <p>Vitesse Max: 300 km/h</p> #}
-									{#     <p>0-100 km/h: 2.5 s</p> #}
-									{#     <p>Nombre Km: 300 km</p> #}
-									{# </div> #}
-										<a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-primary"> Voir le produit</a>
-									<a href="{{ path('app_cart_line_new', {'productId': product.id}) }}" class="btn btn-primary">Ajouter au panier</a>
-								</div>
+							<div class="card-body">
+								<h5 class="card-title">{{ product.name }}</h5>
+								{# <p class="card-text">{{ product.description }}</p> #}
+								<p class="card-price">{{ product.price }}
+									$</p>
+								{# <a href="{{ path('app_product_show', {'id': product.id}) }}" id="button-cart">Voir le produit</a> #}
+								<a href="{{ path('app_cart_line_new', {'productId': product.id}) }}" id="button-cart">Ajouter au panier</a>
 							</div>
 						</div>
-					{% endif %}
-				{% endfor %}
+					</div>
+				{% endif %}
 			{% endfor %}
-		</div>
+		{% endfor %}
 	</div>
-{% endblock %}
+</div>
 
-{# {% include 'footer.html.twig' %} #}
+{# <a href="{{ path('app_product_new') }}" class="btn btn-primary">Create new</a> #}
+{# {% endblock %} #}

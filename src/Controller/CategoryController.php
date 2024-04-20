@@ -46,9 +46,12 @@ class CategoryController extends AbstractController
     #[Route('/{id}', name: 'app_category_show', methods: ['GET'])]
     public function show(Category $category, MediaRepository $mediaRepository): Response
     {
+        // Récupérer les trois premières images pour la catégorie spécifiée
+        $images = $mediaRepository->findThreeImagesForCategory($category->getId());
+
         return $this->render('category/show.html.twig', [
             'category' => $category,
-            'img' => $mediaRepository->findAll()
+            'images' => $images,
         ]);
     }
 

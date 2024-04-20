@@ -1,23 +1,18 @@
 {% include 'base.html.twig' %}
 
+<center>
+	<h1>Nos catégories</h1>
+</center>
+
 <div class="container">
 	<div class="row">
 		{% for category in categories %}
-			<div class="col-md-3">
+			<div class="col-md-4">
 				<a href="{{ path('app_category_show', {'id': category.id}) }}">
 					<div class="card">
-						<img src="{{ asset('../assets/img/cars/luxe.jpg') }}" alt="Description de l'image">
+						<img class="card-img-top" src="{{ asset('../assets/img/cars/luxe.jpg') }}" alt="Description de l'image">
 						<div class="card-body">
 							<h5 class="card-title">{{ category.name }}</h5>
-							<!-- <p>descriptuion</p> -->
-						<!-- <p class="card-text">200000 $</p> -->
-							<!-- <div class="extra-info"> -->
-							<!-- <p>Vitesse Max: 300 km/h</p> -->
-							<!-- <p>0-100 km/h: 2.5 s</p> -->
-							<!-- <p>Nombre Km: 300 km</p> -->
-							<!-- </div> -->
-							<!-- <a href="product.html" id="button-cart">Voir le produit</a> -->
-							<!-- <a href="#" id="button-cart">Ajouter au panier</a> -->
 						</div>
 					</div>
 				</a>

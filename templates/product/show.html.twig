@@ -1,39 +1,32 @@
-{% extends 'base.html.twig' %}
+{% include 'base.html.twig' %}
 
-{% block title %}Product{% endblock %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<img src="{{ asset(img[0].path ~ img[0].type) }}" alt="{{ img[0].alt }}" class="card-img-top" style="border-radius: 20px;">
+		</div>
+		<div class="col-md-6">
+			<div class="vehicule">
+				<div class="card" style="margin-top: 0px;">
+					<div class="card-body">
+						<h5 class="card-title">{{ product.name }}</h5>
+						<p class="card-text">{{ product.description }}</p>
+						<p class="card-text">
+							{% if product.available %}
+								Disponible
+							{% else %}
+								Indisponible
+							{% endif %}
+						</p>
+						<p class="card-price">{{ product.price }}
+							€</p>
+						<a href="{{ path('app_cart_line_new', {'productId': product.id}) }}" id="button-cart">Ajouter au panier</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-{% block body %}
-    <h1>Product</h1>
+{% include 'footer.html.twig' %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ product.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ product.name }}</td>
-            </tr>
-            <tr>
-               <td><img src="{{ asset(img[0].path ~ img[0].type) }}" alt="{{ img[0].alt }}" ></td>
-            <tr>
-                <th>Description</th>
-                <td>{{ product.description }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ product.price }}</td>
-            </tr>
-            <tr>
-                <th>Available</th>
-                <td>{{ product.available ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{path('app_cart_line_new', {'productId': product.id})}}"> ajouter au panier</a>
-
-    <a href="{{ path('app_product_index') }}">back to list</a>
-
-{% endblock %}
