@@ -5,7 +5,7 @@
 
 {% block body %}
 	<center>
-		<h1>CartLine index</h1>
+		<h1>Votre panier</h1>
 	</center>
 	{% if app.user %}
 		{% for cart_line in cart_lines %}
@@ -13,7 +13,11 @@
 				<div class="row" id="portfolio-cards">
 					<div class="col-xl-12">
 						<div class="portfolio-item">
-							<img src="assets/img/voitures/sportives-compactes.jpg" alt="">
+                            {% for media in img %}
+                                {% if cart_line.product.id == media.product.id %}
+							        <img src="{{ asset(media.path ~ media.type) }}" class="card-img-top" alt="{{ media.alt }}">
+                                {% endif %}
+                            {% endfor %}
 							<div class="item-content">
 								<p class="card-title">{{ cart_line.product.name }}</p>
 								<p class="card-title">{{ cart_line.product.price }}
@@ -50,3 +54,6 @@
 {% else %}
 	<h1>Vous devez être connecté pour voir votre panier</h1>
 {% endif %}{% endblock %}
+
+
+{% include 'footer.html.twig' %}
