@@ -46,17 +46,6 @@ class OrderController extends AbstractController
         $entityManager->persist($order);
         $entityManager->flush();
 
-        // Remove all CartLines of the user
-        $cartLines = $cartLineRepository->findBy(['cart' => $cart]);
-        foreach ($cartLines as $cartLine) {
-            $entityManager->remove($cartLine);
-        }
-
-        // Flush the entity manager to commit the CartLine removals
-        $entityManager->flush();
-
-
-
         return $this->redirectToRoute('app_order_show', ['id' => $order->getId()]);
        
     }
