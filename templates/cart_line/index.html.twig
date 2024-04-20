@@ -4,8 +4,9 @@
 
 {% block body %}
     <h1>CartLine index</h1>
+    {% if app.user %}
 
-    <table class="table">
+        <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -50,5 +51,10 @@
         </tbody>
     </table>
 
+        
+    {% else %}
+        <h1>Vous devez être connecté pour voir votre panier</h1>
+    {% endif %}
+    
     {# <a href="{{ path('app_cart_line_new') }}">Create new</a> #}
 {% endblock %}
