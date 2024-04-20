@@ -20,7 +20,10 @@
 						</p>
 						<p class="card-price">{{ product.price }}
 							€</p>
-						<a href="{{ path('app_cart_line_new', {'productId': product.id}) }}" id="button-cart">Ajouter au panier</a>
+						{% if product.available %}
+							<a href="{{ path('app_cart_line_new', {'productId': product.id}) }}" id="button-cart">Ajouter au panier</a>
+						{% endif %}
+						
 					</div>
 				</div>
 			</div>

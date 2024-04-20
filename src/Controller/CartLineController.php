@@ -9,6 +9,7 @@ use App\Form\CartLineType;
 use App\Repository\CartLineRepository;
 use App\Repository\ProductRepository;
 use App\Repository\CartRepository;
+use App\Repository\MediaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class CartLineController extends AbstractController
 {
     #[Route('/', name: 'app_cart_line_index', methods: ['GET'])]
-    public function index(CartLineRepository $cartLineRepository, CartRepository $cartRepository): Response
+    public function index(CartLineRepository $cartLineRepository, CartRepository $cartRepository, MediaRepository $mediaRepository): Response
     { 
         $user = $this->getUser();
         $cart = $cartRepository->findOneBy(['user' => $user]);
@@ -36,6 +37,7 @@ class CartLineController extends AbstractController
         return $this->render('cart_line/index.html.twig', [
             'cart_lines' => $cartLines,
             'total' => $total,
+            'img' => $mediaRepository->findAll(),
         ]);
     }
 
@@ -89,7 +91,7 @@ class CartLineController extends AbstractController
     public function show(CartLine $cartLine): Response
     {
         return $this->render('cart_line/show.html.twig', [
-            'cart_line' => $cartLine,
+            'cart_line' => $cartLine,   
         ]);
     }
 
