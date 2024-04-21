@@ -8,6 +8,7 @@ use App\Form\OrderType;
 use App\Repository\CartLineRepository;
 use App\Repository\CartRepository;
 use App\Repository\CustomerAddressRepository;
+use App\Repository\MediaRepository;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -47,14 +48,28 @@ class OrderController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('app_order_show', ['id' => $order->getId()]);
-        
+
     }
 
     #[Route('/{id}', name: 'app_order_show', methods: ['GET'])]
-    public function show(Order $order,EntityManagerInterface $entityManager ): Response
-    {
+    public function show(Order $order, CustomerAddressRepository $customerAddressRepository, CartRepository $cartRepository, CartLineRepository $cartLineRepository): Response
+    {   
+        $cart = $cartRepository->findOneBy(['user' => $this->getUser()]); 
+        
+        $cartLines = [];
+        $total = 0;
+        if ($cart) {
+            $cartLines = $cartLineRepository->findBy(['cart' => $cart]);
+            foreach ($cartLines as $cartLine) {
+                $total += $cartLine->getProduct()->getPrice() * $cartLine->getQuantity();
+            }
+        }
+        
         return $this->render('order/show.html.twig', [
             'order' => $order,
+            'adress' => $customerAddressRepository->findBy(['user' => $this->getUser()]),
+            'total' => $total,
+            'cart_lines' => $cartLines,
         ]);
     }
 

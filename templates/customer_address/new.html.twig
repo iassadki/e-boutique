@@ -3,9 +3,15 @@
 {% block title %}New CustomerAddress{% endblock %}
 
 {% block body %}
-    <h1>Create new CustomerAddress</h1>
+    {% if cart_lines is empty %}
+        <center>
+            <h1>Vous ne pouvez pas commander, votre panier est vide</h1>
+            <a href="{{ path('app_product_index') }}" id="button-cart">Retour à la boutique</a>
+        </center>
+        
+    {% else %}
+        <h1>Veuillez renseigner votre adresse </h1>
+        {{ include('customer_address/_form.html.twig') }}
+    {% endif %}
 
-    {{ include('customer_address/_form.html.twig') }}
-
-    <a href="{{ path('app_customer_address_index') }}">back to list</a>
 {% endblock %}

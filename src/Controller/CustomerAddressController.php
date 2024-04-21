@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\CustomerAddress;
 use App\Form\CustomerAddressType;
+use App\Repository\CartLineRepository;
+use App\Repository\CartRepository;
 use App\Repository\CustomerAddressRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,12 +25,15 @@ class CustomerAddressController extends AbstractController
     }
 
     #[Route('/new', name: 'app_customer_address_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, CartRepository $cartRepository, CartLineRepository $cartLineRepository): Response
     {
         $customerAddress = new CustomerAddress();
         $form = $this->createForm(CustomerAddressType::class, $customerAddress);
         $user = $this->getUser();
         $form->handleRequest($request);
+
+        $cart = $cartRepository->findOneBy(['user' => $user]);
+        $cartLines = $cartLineRepository->findBy(['cart' => $cart]);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $customerAddress->setId($user);
@@ -42,6 +47,7 @@ class CustomerAddressController extends AbstractController
         return $this->render('customer_address/new.html.twig', [
             'customer_address' => $customerAddress,
             'form' => $form,
+            'cart_lines' => $cartLines,
         ]); 
        
     }
