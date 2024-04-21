@@ -15,9 +15,9 @@
 	<div class="container">
 		<div class="row">
 			{% for product in products %}
-				{% for media in img %} 
+				{% for media in img %}
 					{% if product.id == media.product.id %}
-						<div class="col-md-4">
+						<div class="col-xl-4 col-md-12 col-xs-12">
 							<a class"link-vehicles" href="{{ path('app_product_show', {'id': product.id}) }}">
 								<div class="card">
 									<img src="{{ asset(media.path ~ media.type) }}" class="card-img-top" alt="{{ media.alt }}">
@@ -36,8 +36,12 @@
 				{% endfor %}
 			{% endfor %}
 		</div>
+		{% if is_granted('ROLE_ADMIN') %}
+			<a href="{{ path('app_product_new') }}" class="card-title">Add New Product</a>
+		{% endif %}
 	</div>
 
 
-	{# <a href="{{ path('app_product_new') }}" class="btn btn-primary">Create new</a> #}
+	
+{% include 'footer.html.twig' %}
 {% endblock %}

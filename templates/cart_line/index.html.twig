@@ -1,8 +1,5 @@
 {% include 'base.html.twig' %}
 
-{# {% block title %}CartLine index
-{% endblock %} #}
-
 {% block body %}
 	<center>
 		<h1>Votre panier</h1>
@@ -10,50 +7,52 @@
 	{% if app.user %}
 		{% for cart_line in cart_lines %}
 			<div class="container">
-				<div class="row" id="portfolio-cards">
-					<div class="col-xl-12">
-						<div class="portfolio-item">
-                            {% for media in img %}
-                                {% if cart_line.product.id == media.product.id %}
-							        <img src="{{ asset(media.path ~ media.type) }}" class="card-img-top" alt="{{ media.alt }}">
-                                {% endif %}
-                            {% endfor %}
-							<div class="item-content">
-								<p class="card-title">{{ cart_line.product.name }}</p>
-								<p class="card-title">{{ cart_line.product.price }}
-									€</p>
-								{# <input type="number" value="1" min="1" max="10"> #}
-								{# <a href="#" class="button-cart2">Supprimer du panier</a> #}
-								<form action="{{ path('app_cart_line_edit', {'id': cart_line.id}) }}" method="post">
-									<input type="number" name="quantity" value="{{ cart_line.quantity }}" min="1" max="8">
-									<input type="submit" value="Update">
-								</form>
-								<form method="post" action="{{ path('app_cart_line_delete', {'id': cart_line.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cart_line.id) }}">
-									<button class="button-cart">Delete</button>
-								</form>
-							</div>
+				<div class="row">
+					<div class="row align-items-center">
+						<div class="col-md-4">
+							{% for media in img %}
+								{% if cart_line.product.id == media.product.id %}
+									<img src="{{ asset(media.path ~ media.type) }}" class="card-img-top" alt="{{ media.alt }}" styles="width:150px;">
+								{% endif %}
+							{% endfor %}
+						</div>
+						<div class="col-md-2">
+							<p class="card-title">{{ cart_line.product.name }}</p>
+						</div>
+						<div class="col-md-2">
+							<p class="card-price">{{ cart_line.product.price }}
+								€</p>
+						</div>
+						<div class="col-md-2">
+							<form action="{{ path('app_cart_line_edit', {'id': cart_line.id}) }}" method="post">
+								<input type="number" name="quantity" value="{{ cart_line.quantity }}" min="1" max="8">
+								<input type="submit" value="Update">
+							</form>
+						</div>
+						<div class="col-md-2">
+							<form method="post" action="{{ path('app_cart_line_delete', {'id': cart_line.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ cart_line.id) }}">
+								<button class="button-cart">Delete</button>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		{% endfor %}
 
-	{% endfor %}
+		<center>
+			<h3>
+				Total:
+				{{ total }}
+				€
+			</h3>
+		</center>
 
+		<a href="{{ path('app_customer_address_new') }}" id="button-cart">Commander</a>
 
-<center>
-	<h3>
-		Total:
-		{{ total }} €
-	</h3>
-</center>
-
-	<a href="{{ path('app_customer_address_new') }}" id="button-cart">Commander</a>
-
-{% else %}
-	<h1>Vous devez être connecté pour voir votre panier</h1>
-{% endif %}{% endblock %}
-
+	{% else %}
+		<h1>Vous devez être connecté pour voir votre panier</h1>
+	{% endif %}
+{% endblock %}
 
 {% include 'footer.html.twig' %}

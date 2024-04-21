@@ -1,6 +1,5 @@
 {% include 'base.html.twig' %}
 
-
 {% block body %}
 	<div class="container">
 		<div class="row justify-content-center">
@@ -26,11 +25,11 @@
 
 					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-					<button id="button-cart" type="submit" >Sign in</button>
+					<button id="button-cart" type="submit" >Connexion</button>
 				</form>
 
 				<div class="mt-3">
-					<a href="{{ path('app_register') }}" id="button-cart">Create an account</a>
+					<a href="{{ path('app_register') }}" id="button-cart">Créer un compte</a>
 				</div>
 			</div>
 		</div>

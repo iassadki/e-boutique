@@ -1,11 +1,14 @@
-{% extends 'base.html.twig' %}
+{% include 'base.html.twig' %}
 
-{% block title %}New Category{% endblock %}
-
-{% block body %}
-    <h1>Create new Category</h1>
+{# {% block title %}New Category{% endblock %} #}
+{% if is_granted('ROLE_ADMIN') %}
+	 <h1>Create new Category</h1>
 
     {{ include('category/_form.html.twig') }}
+    {% else %}
+        <center>
+            <h1>Vous n'avez pas l'autorisation d'accéder à ce contenu</h1>
+        </center>
 
-    <a href="{{ path('app_category_index') }}">back to list</a>
-{% endblock %}
+{% endif %}
+   

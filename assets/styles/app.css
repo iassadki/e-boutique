@@ -1,5 +1,5 @@
 /* Desktop version */
-@media screen and (min-width: 1024px) and (max-width: 2000px) {
+/* @media screen and (min-width: 1024px) and (max-width: 2000px) { */
 
     body {
         margin: 0;
@@ -8,6 +8,7 @@
         /* height: 100%; */
         color: #000;
         font-family: 'Blorado', sans-serif;
+        font-size: 1.2em;
     }
 
     header {
@@ -26,7 +27,7 @@
         background-repeat: no-repeat;
         background-position: center;
         /* background-size: cover; */
-        height: 50vh;
+        height: 30vh;
     }
 
     .background-image .titre {
@@ -218,7 +219,10 @@
         font-weight: 700;
     }
 
-    /*! ALL VEHICLES PAGE */
+    .card-body {
+        text-decoration: none;
+    }
+
     .card-title {
         font-size: 20px;
         font-weight: 700;
@@ -287,14 +291,11 @@
         justify-content: center;
     }
 
-    /*! STYLE CODE PEN */
-
-    /* .container {
-        display: flex;
+    .container {
+        /* display: flex; */
         justify-content: center;
-    } */
+    }
 
-    /* cibler la class card  */
 
     .grid-container {
         display: flex;
@@ -482,4 +483,3 @@
     .site-footer p.text-center {
         margin-top: 20px;
     }
-}

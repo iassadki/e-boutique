@@ -8,7 +8,7 @@
 		{% for product in category.products %}
 			{% for media in img %}
 				{% if product.id == media.product.id %}
-					<div class="col-md-4">
+					<div class="col-xl-4 col-md-12 col-xs-12">
 						<a class"link-vehicles" href="{{ path('app_product_show', {'id': product.id}) }}">
 
 							<div class="card">
@@ -19,7 +19,7 @@
 								<h5 class="card-title">{{ product.name }}</h5>
 								{# <p class="card-text">{{ product.description }}</p> #}
 								<p class="card-price">{{ product.price }}
-									$</p>
+									€</p>
 								{# <a href="{{ path('app_product_show', {'id': product.id}) }}" id="button-cart">Voir le produit</a> #}
 								<a href="{{ path('app_cart_line_new', {'productId': product.id}) }}" id="button-cart">Ajouter au panier</a>
 							</div>

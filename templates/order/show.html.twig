@@ -1,52 +1,56 @@
-{% extends 'base.html.twig' %}
+{% include 'base.html.twig' %}
 
-{% block title %}Order{% endblock %}
+{# {% block title %}Order
+{% endblock %} #}
 
-{% block body %}
-    <h1>Order</h1>
+	<div class="container">
+		<h1>Votre commande</h1>
 
-    <table class="table"> 
-        <thead>
-            Votre commande est validée et enregistré merci pour votre achat !<br>
-            Recap : <br>
-        </thead>
-        <tbody>
-            <tr>
-                <th>Votre numéro de commande : </th>
-                <td>{{ order.orderNumber }}</td>
-            </tr>
-            <tr>
-                <th>Validé à </th>
-                <td>{{ order.dateTime ? order.dateTime|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            {% for cartline in cart_lines %}
-                <tr>
-                    <th>Produit : </th>
-                    <td>{{ cartline.product.name }}</td>
-                </tr>
-                <tr>
-                    <th>Quantité : </th>
-                    <td>{{ cartline.quantity }}</td>
-                </tr>
-                <tr>
-                    <th>Prix : </th>
-                    <td>{{ cartline.product.price }}</td>
-                </tr>
-            {% endfor %}
-            <tr>
-                <th>Total : </th>
-                <td>{{ total }}</td>
-            </tr>
-            <tr>
-                <th>Adresse de livraison : </th>
-                <td>{{ adress[0].address }},{{ adress[0].city }} {{ adress[0].postalCode }} {{ adress[0].country}} </td>
-            </tr>
-        </tbody>
-    </table>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-body">
+						<h3>Votre commande est validée et enregistrée, {{adress[0].type}} {{adress[0].firstName}} {{adress[0].name}}, merci pour votre achat !<br></h3>
+						<h5 class="card-title">Récapitulatif de la commande</h5>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">Numéro de commande:
+								{{ order.orderNumber }}</li>
+							<li class="list-group-item">Validé à:
+								{{ order.dateTime ? order.dateTime|date('Y-m-d H:i:s') : '' }}</li>
+							<li class="list-group-item">Total:
+								{{ total }} €</li>
+							<li class="list-group-item">Adresse de livraison:
+								{{ adress[0].address }},
+								{{ adress[0].city }}
+								{{ adress[0].postalCode }}
+								{{ adress[0].country }}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
 
-    <a href="{{ path('home', {'clear_cart': true}) }}">Retour à l'accueil</a>
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Produits commandés</h5>
+						{% for cartline in cart_lines %}
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">Produit:
+									{{ cartline.product.name }}</li>
+								<li class="list-group-item">Quantité:
+									{{ cartline.quantity }}</li>
+								<li class="list-group-item">Prix:
+									{{ cartline.product.price }} €</li>
+							</ul>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    {# <a href="{{ path('app_order_edit', {'id': order.id}) }}">edit</a> #}
+	<div class="container mt-3">
+		<a href="{{ path('home', {'clear_cart': true}) }}" id="button-cart">Retour à l'accueil</a>
+	</div>
 
-    {# {{ include('order/_delete_form.html.twig') }} #}
-{% endblock %}
+{% include 'footer.html.twig' %}
