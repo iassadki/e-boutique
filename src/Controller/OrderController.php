@@ -47,19 +47,12 @@ class OrderController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('app_order_show', ['id' => $order->getId()]);
-       
+        
     }
 
     #[Route('/{id}', name: 'app_order_show', methods: ['GET'])]
-    public function show(Order $order,EntityManagerInterface $entityManager ,CustomerAddressRepository $customerAddressRepository): Response
+    public function show(Order $order,EntityManagerInterface $entityManager ): Response
     {
-        $user = $this->getUser();  
-        $customerAddresses = $customerAddressRepository->findBy(['user' => $user]);
-        
-        foreach($customerAddresses as $customerAddress){
-            $entityManager->remove($customerAddress);
-        }
-        $entityManager->flush();
         return $this->render('order/show.html.twig', [
             'order' => $order,
         ]);
