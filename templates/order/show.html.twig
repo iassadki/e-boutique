@@ -19,6 +19,28 @@
                 <th>Validé à </th>
                 <td>{{ order.dateTime ? order.dateTime|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+            {% for cartline in cart_lines %}
+                <tr>
+                    <th>Produit : </th>
+                    <td>{{ cartline.product.name }}</td>
+                </tr>
+                <tr>
+                    <th>Quantité : </th>
+                    <td>{{ cartline.quantity }}</td>
+                </tr>
+                <tr>
+                    <th>Prix : </th>
+                    <td>{{ cartline.product.price }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <th>Total : </th>
+                <td>{{ total }}</td>
+            </tr>
+            <tr>
+                <th>Adresse de livraison : </th>
+                <td>{{ adress[0].address }},{{ adress[0].city }} {{ adress[0].postalCode }} {{ adress[0].country}} </td>
+            </tr>
         </tbody>
     </table>
 
