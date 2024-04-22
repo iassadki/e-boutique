@@ -2,27 +2,34 @@
 
 <!-- ![Nom de la capture](https://github.com/brunosllz/visit-card-generator/blob/main/src/assets/github-cover.png) -->
 
-## 💻 About the project
-Website where you can connect and buy cars online. Project done in a group of 2 people.
+## 💻 A propos du projet
+Site web où vous pouvez vous connecter et acheter des voitures. Projet effectué par un groupe de 2 personnes.
 
-## ⚙️ Functionalities
-- Log in/Sign up
-- Buy cars
-- Add cars to cart
-- Remove cars from cart
+## ⚙️ Fonctionnalitées
+- S'inscrire /Se connecter => OK
+- Parcours des produits => OK
+- Parcours des catégories => OK
+- Acheter des voitures => OK
+- Ajouter des voitures au panier => OK
+- Supprimer les voitures du panier => OK
+- Ajustement du prix par rapport à la quantité => OK
+- Message de commande => OK
+- Ajouter de nouvelles catégories en tant qu'admin => OK    
+- Ajouter de nouveaux produits en tant qu'admin => OK
+
 
 ## 🛠 Technologies
-- Languages : `PHP`, `Twig`, `CSS`
+- Langages : `PHP`, `Twig`, `CSS`
 - Frameworks : `Symfony`
 - Architecture : `MVC`
-- Databases : `SQL`
+- Base de Données : `SQL`
 
-## 🌐 Website
-**[eboutique](https://www.projet-web-training.ovh/...)**
+## 🌐 Site web
+**[eboutique](http://tatti.alwaysdata.net/)**
 
 <!-- ## 💻 Screens/Demo -->
 <!-- ![Demo](https://github.com/brunosllz/visit-card-generator/blob/main/src/assets/github-cover.png) -->
 
-## 👤 Authors
+## 👤 Auteurs
 - [@iassadki](https://github.com/iassadki)
 - [@Jordy-6](https://github.com/Jordy-6)
