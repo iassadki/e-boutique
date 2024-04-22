@@ -1,7 +1,5 @@
 # e-boutique
 
-<!-- ![Nom de la capture](https://github.com/brunosllz/visit-card-generator/blob/main/src/assets/github-cover.png) -->
-
 ## 💻 A propos du projet
 Site web où vous pouvez vous connecter et acheter des voitures. Projet effectué par un groupe de 2 personnes.
 
@@ -27,9 +25,11 @@ Site web où vous pouvez vous connecter et acheter des voitures. Projet effectu�
 ## 🌐 Site web
 **[eboutique](http://tatti.alwaysdata.net/)**
 
-<!-- ## 💻 Screens/Demo -->
-<!-- ![Demo](https://github.com/brunosllz/visit-card-generator/blob/main/src/assets/github-cover.png) -->
-
 ## 👤 Auteurs
 - [@iassadki](https://github.com/iassadki)
 - [@Jordy-6](https://github.com/Jordy-6)
+
+## Lien git
+- https://github.com/Jordy-6/E-boutique
+
+

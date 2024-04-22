@@ -10,7 +10,6 @@
 			<div class="col-xl-4 col-md-12 col-xs-12">
 				<a href="{{ path('app_category_show', {'id': category.id}) }}" class="card-title">
 					<div class="card">
-						<img class="card-img-top" src="{{ asset('../assets/img/cars/luxe.jpg') }}" alt="Description de l'image">
 						<div class="card-body">
 							<h5 class="card-title">{{ category.name }}</h5>
 						</div>
@@ -23,7 +22,5 @@
 	<a href="{{ path('app_category_new') }}" class="card-title">Add Category</a>
 {% endif %}
 </div>
-
-
 
 {% include 'footer.html.twig' %}
