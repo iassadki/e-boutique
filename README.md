@@ -22,8 +22,8 @@ Site web où vous pouvez vous connecter et acheter des voitures. Projet effectu�
 - Architecture : `MVC`
 - Base de Données : `SQL`
 
-## 🌐 Site web
-- **[eboutique](http://tatti.alwaysdata.net/)**
+<!-- ## 🌐 Site web -->
+<!-- - **[eboutique](http://tatti.alwaysdata.net/)** -->
 
 ## 👤 Auteurs
 - [@iassadki](https://github.com/iassadki)
