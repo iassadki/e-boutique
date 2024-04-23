@@ -1,4 +1,4 @@
-# exotic-rentals
+# exotic-cars
 
 ## 💻 A propos du projet
 Site web où vous pouvez vous connecter et acheter des voitures. Projet effectué par un groupe de 2 personnes.
