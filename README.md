@@ -1,4 +1,4 @@
-# e-boutique
+# exotic-rentals
 
 ## 💻 A propos du projet
 Site web où vous pouvez vous connecter et acheter des voitures. Projet effectué par un groupe de 2 personnes.
@@ -23,13 +23,9 @@ Site web où vous pouvez vous connecter et acheter des voitures. Projet effectu�
 - Base de Données : `SQL`
 
 ## 🌐 Site web
-**[eboutique](http://tatti.alwaysdata.net/)**
+- **[eboutique](http://tatti.alwaysdata.net/)**
 
 ## 👤 Auteurs
 - [@iassadki](https://github.com/iassadki)
 - [@Jordy-6](https://github.com/Jordy-6)
-
-## Lien git
-- https://github.com/Jordy-6/E-boutique
-
 
